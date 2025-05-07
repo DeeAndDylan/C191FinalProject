@@ -20,7 +20,7 @@ import javax.sound.sampled.Clip;
 public class AudioPlayer 
 {
 	// The Clip object hold the audio sample.
-	private Clip clip;
+	private final Clip clip;
 
 	/**
 	 * Purpose: Default constructor that loads audio file and prepares for playback.
@@ -28,33 +28,27 @@ public class AudioPlayer
 	 * @param filePath The file path of the audio file(.wav) to be loaded.
 	 * @throws Exception Throws exception if file isn't found or if an error occurs.
 	 */
-	public AudioPlayer(String filePath) throws Exception 
+	public AudioPlayer(Clip clip) throws Exception 
 	{
-		// Creates a file object for the audio file.
-		File audioFile = new File(filePath);
-
-		// If file does not exist, an exception is thrown.
-		if (!audioFile.exists()) 
+		if(clip==null)
 		{
-			throw new IOException("File notFound " + filePath);
+			throw new Exception("Clip cant be null");
 		}
-
-		// Gets an audio input stream from file.
-		AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-
-		// Creates a Clip
-		clip = AudioSystem.getClip();
-
-		// Loads the audio data into the Clip
-		clip.open(audioStream);
+		
+		this.clip = clip;
 	}
 
 	/**
 	 * Purpose: Plays the audio from the beginning. If there is clip is already
 	 * playing, it stops it and then restarts.
 	 */
-	public void play() 
+	public void play() throws Exception
 	{
+		if(clip==null || !clip.isOpen())
+		{
+			throw new Exception("Audio clip not available");
+		}
+		
 		if (clip.isRunning()) 
 		{
 			// Stops clip if its already playing.

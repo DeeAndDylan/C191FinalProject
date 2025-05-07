@@ -2,6 +2,7 @@ package cs191;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.sound.sampled.*;
 
 /**
  * Lead Author(s):
@@ -42,32 +43,20 @@ public class SampleHandler
 	 * @param baseNote The MIDI note number to map the audio sample to.
 	 * @param filePath The path of the audio file (.wav) that is being loaded.
 	 */
-	public void loadSample(int baseNote, String filePath) 
+	public void loadSample(int semitone, AudioInputStream stream) throws Exception
 	{
-		try 
-		{
-			// Creates an AudioPlayer for the audio file.
-			AudioPlayer player = new AudioPlayer(filePath);
-
-			// Stores the player in the map and with the MIDI note as the key.
-			sampleMap.put(baseNote, player);
-
-			System.out.println("Loaded sample for Midi note" + baseNote);
-		}
-
-		// Throws exception is sample fails to load.
-		catch (Exception e) 
-		{
-			System.out.print("Failed to load sample");
-		}
+		Clip clip = AudioSystem.getClip();
+		clip.open(stream);
+		sampleMap.put(semitone, new AudioPlayer(clip));
 	}
 
 	/**
 	 * Purpose: Plays the sample given MIDI not number.
 	 * 
 	 * @param midiNote The MIDI not number.
+	 * @throws Exception 
 	 */
-	public void playSample(int midiNote) 
+	public void playSample(int midiNote) throws Exception 
 	{
 		int shiftedNote = midiNote +(currentOctave * 12);
 		

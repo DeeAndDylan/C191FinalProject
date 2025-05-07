@@ -70,7 +70,12 @@ public class MidiInputHandler implements Receiver
 					System.out.println("Received MIDI NOTE_ON: " + midiNote);
 
 					// Tells sample handler to play sample for given MIDI note.
-					sampleHandler.playSample(midiNote);
+					try {
+						sampleHandler.playSample(midiNote);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 
 				
