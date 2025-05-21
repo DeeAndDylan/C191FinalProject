@@ -8,7 +8,7 @@ public enum InstrumentType {
     private final String displayName;
     private final int programNumber;
 
-    InstrumentType(String folderName, String displayName, int programNumber) {
+   private InstrumentType(String folderName, String displayName, int programNumber) {
         this.folderName = folderName;
         this.displayName = displayName;
         this.programNumber = programNumber;

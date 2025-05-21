@@ -20,14 +20,16 @@ public class SampleHandler
 	// A map that couples the MIDI note numbers to given AudioPlayer.
 	private Map<Integer, AudioPlayer> sampleMap;
 	
-	// TODO: ADD Comments
-	private int currentOctave = 0;
+//	// TODO: ADD Comments
+//	private int currentOctave = 0;
+//	
+//	// TODO: ADD Comments
+//	private static final int MAX_OCTAVE_SHIFT = 2;
 	
 	// TODO: ADD Comments
-	private static final int MAX_OCTAVE_SHIFT = 2;
+	private static final int SAMPLE_START_NOTE = 48;
 	
-	// TODO: ADD Comments
-	private static final int SAMPLE_START_NOTE = 0;
+	
 
 	/**
 	 * Purpose: Default constructor that initializes the sample map.
@@ -47,7 +49,10 @@ public class SampleHandler
 	{
 		Clip clip = AudioSystem.getClip();
 		clip.open(stream);
-		sampleMap.put(semitone, new AudioPlayer(clip));
+		int midiNote = SAMPLE_START_NOTE + semitone;
+		sampleMap.put(midiNote, new AudioPlayer(clip));
+		System.out.println("Loaded sample for MIDI note: " + midiNote);
+		 
 	}
 
 	/**
@@ -58,7 +63,7 @@ public class SampleHandler
 	 */
 	public void playSample(int midiNote) throws Exception 
 	{
-		int shiftedNote = midiNote +(currentOctave * 12);
+		int shiftedNote = midiNote;
 		
 		
 		if(shiftedNote < 0 || shiftedNote > 127)
@@ -67,11 +72,7 @@ public class SampleHandler
 			
 			return;
 		}
-		
-		int baseNote = (shiftedNote - SAMPLE_START_NOTE) % 12;
-		
-		if(baseNote < 0) baseNote += 12;
-		
+			
 		// Looks up the AudioPlayer in the map.
 		AudioPlayer player = sampleMap.get(midiNote);
 
@@ -88,45 +89,4 @@ public class SampleHandler
 		}
 	}
 	
-	public void octaveUp()
-	{
-		if(currentOctave < MAX_OCTAVE_SHIFT)
-		{
-			if(currentOctave < 127){
-				currentOctave++;	
-				System.out.println("Octave shifted up to: " + currentOctave);	
-			}
-			else{
-				System.out.println("Cannot Shift the Octive any higher.");
-			}
-			
-		}
-	}
-	
-	public void octaveDown()
-	{
-		if(currentOctave > MAX_OCTAVE_SHIFT)
-		{
-			if(currentOctave > 0){
-				currentOctave--;
-				System.out.println("Octave shifted down to: " + currentOctave);
-			}
-			else{
-				System.out.println("Cannot Shift the Octive any lower.");
-			}
-			
-		}
-	}
-	
-	public void resetOctave()
-	{
-		currentOctave = 0;
-		System.out.println("Octave reset to default");
-		
-	}
-	
-	public int getCurrentOctave()
-	{
-		return currentOctave;
-	}
 }

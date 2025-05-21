@@ -20,19 +20,18 @@ public class MidiInputHandler implements Receiver
 {
 	// References SampleHandler to play sounds.
 	private SampleHandler sampleHandler;
+	private MidiListener listener;
 	
-	 private static final int OCTAVE_UP_BUTTON = 127; // Highest key
-	 private static final int OCTAVE_DOWN_BUTTON = 0; // Lowest key
-
 	/**
 	 * Purpose: Default that takes SampleHandler to play sounds when given MIDI
 	 * notes.
 	 * 
 	 * @param sampleHandler Manages and plays samples.
 	 */
-	public MidiInputHandler(SampleHandler sampleHandler) 
+	public MidiInputHandler(SampleHandler sampleHandler, MidiListener listener) 
 	{
 		this.sampleHandler = sampleHandler;
+		this.listener = listener;
 	}
 
 	/**
@@ -55,30 +54,22 @@ public class MidiInputHandler implements Receiver
 				// Gets the MIDI note number.
 				int midiNote = sm.getData1();
 				
-				if(midiNote == OCTAVE_UP_BUTTON)
-				{
-					sampleHandler.octaveUp();
-				}
-				
-				else if(midiNote == OCTAVE_DOWN_BUTTON)
-				{
-					sampleHandler.octaveDown();
-				}
-				
-				else
-				{
-					System.out.println("Received MIDI NOTE_ON: " + midiNote);
+				System.out.println("Received MIDI NOTE_ON: " + midiNote);
 
-					// Tells sample handler to play sample for given MIDI note.
-					try {
-						sampleHandler.playSample(midiNote);
-					} catch (Exception e) {
+				// Tells sample handler to play sample for given MIDI note.
+				try
+				{
+					sampleHandler.playSample(midiNote);
+				} 
+				catch (Exception e) 
+				{
 						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					e.printStackTrace();
 				}
 
-				
+				if (listener != null) {
+					listener.onNoteOn(midiNote);
+				}
 			}
 		}
 	}
@@ -90,5 +81,4 @@ public class MidiInputHandler implements Receiver
 	public void close() 
 	{
 	}
-
 }

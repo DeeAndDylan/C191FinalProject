@@ -9,7 +9,9 @@ public class SampleLoader {
     private static final String[] NOTE_NAMES = {
         "A1", "A1s", "B1", "C1", "C1s", 
         "D1", "D1s", "E1", "F1", "F1s", 
-        "G1", "G1s"
+        "G1", "G1s","A2", "A2s", "B2", "C2", "C2s", 
+        "D2", "D2s", "E2", "F2", "F2s", 
+        "G2", "G2s","C3"
     };
 
     public static void loadInstrument(SampleHandler handler, InstrumentType type) {
