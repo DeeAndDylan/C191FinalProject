@@ -16,8 +16,12 @@ public class GUI extends JFrame implements MidiListener
 	private JLabel noteLabel;
 	private SampleHandler sampleHandler;
 	private MidiInputHandler midiInputHandler;
-	private static final int[] MIDI_NOTES = {48, 49, 50, 51, 52, 53, 54};
-    private static final String[] NOTE_NAMES = {"A1", "B1", "C1", "D1", "E1", "F1", "G1"};
+	private static final int[] MIDI_NOTES = {48, 49, 50, 51, 52, 53, 54, 55, 56, 57,58, 59,
+											60, 61, 62, 63, 64,65, 66, 67,68, 69 ,70 , 71, 72};
+    private static final String[] NOTE_NAMES = {"C1", "C1s", "D1", "D1s", "E1", "F1", "F1s", 
+    											"G1", "G1s", "A1", "A1s", "B1", "C2", "C2s", 
+    											"D2", "D2s", "E2", "F2", "F2s", 
+    											"G2", "G2s", "A2", "A2s", "B2", "C3"};
 
 	/**
 	 * Constructor that builds the GUI for the game, to be called in the main method that starts the game up.
