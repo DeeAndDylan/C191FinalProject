@@ -13,12 +13,11 @@ import javax.sound.sampled.Clip;
  * @author Dawit Eshete
  * @author Dylan Hancock
  * 
- * Other Contributers: ChatGPT
+ *         Other Contributers: ChatGPT
  * 
- * Responsibilities of Class: To load and play short audio files.
+ *         Responsibilities of Class: To load and play short audio files.
  */
-public class AudioPlayer 
-{
+public class AudioPlayer {
 	// The Clip object hold the audio sample.
 	private final Clip clip;
 
@@ -28,13 +27,11 @@ public class AudioPlayer
 	 * @param filePath The file path of the audio file(.wav) to be loaded.
 	 * @throws Exception Throws exception if file isn't found or if an error occurs.
 	 */
-	public AudioPlayer(Clip clip) throws Exception 
-	{
-		if(clip==null)
-		{
+	public AudioPlayer(Clip clip) throws Exception {
+		if (clip == null) {
 			throw new Exception("Clip cant be null");
 		}
-		
+
 		this.clip = clip;
 	}
 
@@ -42,22 +39,19 @@ public class AudioPlayer
 	 * Purpose: Plays the audio from the beginning. If there is clip is already
 	 * playing, it stops it and then restarts.
 	 */
-	public void play() throws Exception
-	{
-		if(clip==null || !clip.isOpen())
-		{
+	public void play() throws Exception {
+		if (clip == null || !clip.isOpen()) {
 			throw new Exception("Audio clip not available");
 		}
-		
-		if (clip.isRunning()) 
-		{
+
+		if (clip.isRunning()) {
 			// Stops clip if its already playing.
 			clip.stop();
 		}
 
 		// Rewinds to start of clip.
-		clip.setFramePosition(0); 
-		
+		clip.setFramePosition(0);
+
 		// Starts the playback.
 		clip.start();
 	}
@@ -65,10 +59,8 @@ public class AudioPlayer
 	/**
 	 * Purpose: Stops clip if it is currently playing.
 	 */
-	public void stop() 
-	{
-		if (clip.isRunning()) 
-		{
+	public void stop() {
+		if (clip.isRunning()) {
 			clip.stop();
 		}
 	}

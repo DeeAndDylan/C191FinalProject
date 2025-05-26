@@ -88,5 +88,5 @@ public class SampleHandler
 			System.out.println("No sample assigned to MIDI note");
 		}
 	}
-	
+
 }
