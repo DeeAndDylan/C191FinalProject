@@ -19,8 +19,8 @@ public class PianoButtons extends JLayeredPane { //PianoButtons is-a JLayeredPan
 			true, false, false, true, false, true, false, false, true, false, true, false, true, false, false };
 
     //The final variable dimensions for both the black keys and the white keys.
-	private static final Dimension WHITE_KEYS = new Dimension(60, 240);
-	private static final Dimension BLACK_KEYS = new Dimension(40, 160);
+	private static final Dimension WHITE_KEYS = new Dimension(80, 300);
+	private static final Dimension BLACK_KEYS = new Dimension(50, 220);
 	
 	/**
 	 * Constructor that creates the keys that are placed inside of the GUI.

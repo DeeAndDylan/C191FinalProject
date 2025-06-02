@@ -51,4 +51,9 @@ public enum InstrumentType {
 	public int getProgramNumber() {
 		return programNumber;
 	}
+	
+	@Override
+	public String toString() {
+	    return displayName;
+	}
 }

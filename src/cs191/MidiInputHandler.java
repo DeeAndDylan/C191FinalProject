@@ -71,4 +71,9 @@ public class MidiInputHandler implements Receiver {
 	@Override
 	public void close() {
 	}
+
+	public void setSampleHandler(SampleHandler sample) {
+		this.sampleHandler = sample;
+		
+	}
 }
