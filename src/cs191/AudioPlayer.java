@@ -13,13 +13,13 @@ import javax.sound.sampled.Clip;
  * @author Dawit Eshete
  * @author Dylan Hancock
  * 
- *         Other Contributers: ChatGPT
+ * Other Contributers: ChatGPT
  * 
- *         Responsibilities of Class: To load and play short audio files.
+ * Responsibilities of Class: To load and play short audio files.
  */
 public class AudioPlayer {
 	// The Clip object hold the audio sample.
-	private final Clip clip;
+	private final Clip clip; //AudioPlayer has-a Clip
 
 	/**
 	 * Purpose: Default constructor that loads audio file and prepares for playback.

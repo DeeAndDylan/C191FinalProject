@@ -6,12 +6,17 @@ import javax.swing.*;
 import cs191.instruments.InstrumentType;
 
 import java.awt.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
-public class GUI extends JFrame implements MidiListener {
+public class GUI extends JFrame implements MidiListener { //GUI is-a JFrame
 	//instance variables
-	private JLabel noteLabel;
-	private SampleHandler sample;
-	private MidiInputHandler midi;
+	private JLabel noteLabel; //GUI has-a JLabel
+	private JTextArea noteQueue; //
+	private SampleHandler sample; //GUI has-a SampleHandler
+	private MidiInputHandler midi; //GUI has-a MidiInputHandler
+	private final Queue<String> lastKeys = new LinkedList<>(); 
+	private static final int MAX_QUEUE = 10;
 
 	/**
 	* Constructor that creates the GUI to be run in the main method
@@ -22,6 +27,9 @@ public class GUI extends JFrame implements MidiListener {
 
 		setTitle("Virtual MIDI Piano");
 		setLayout(new BorderLayout());
+
+		noteQueue = new JTextArea(10, 20);
+		add(new JScrollPane(noteQueue), BorderLayout.SOUTH);
 
 		noteLabel = new JLabel("No MIDI input yet", SwingConstants.CENTER);
 		add(noteLabel, BorderLayout.NORTH);
@@ -62,7 +70,22 @@ public class GUI extends JFrame implements MidiListener {
 	*/
 	@Override
 	public void onNoteOn(int midiNote) {
-		SwingUtilities.invokeLater(() -> noteLabel.setText("Triggered Note: " + midiNote));
+		String noteName = PianoButtons.getNote(midiNote);
+		noteLabel.setText("Triggered Note: " + noteName);
+		
+		lastKeys.add("Triggered Note: " + noteName);
+		if (lastKeys.size() > MAX_QUEUE) {
+			lastKeys.poll();
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		for (String note : lastKeys) {
+			sb.append(note).append("\n");
+		
+		}
+		
+		noteQueue.setText(sb.toString());
+
 	}
 
 	/**
@@ -79,7 +102,7 @@ public class GUI extends JFrame implements MidiListener {
 	public static void main(String[] args) {
 		try {
 			//loads the samples and puts them in the sampleHandler
-			PreLoadedSamples preloader = new PreLoadedSamples(InstrumentType.PIANO);
+			PreLoadedSamples preloader = new PreLoadedSamples(InstrumentType.SYNTH);
 			SampleHandler sampleManager = preloader.getSampleHandler();
 			//creates the GUI
 			GUI gui = new GUI(sampleManager);

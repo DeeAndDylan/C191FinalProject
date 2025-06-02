@@ -19,14 +19,7 @@ public class SampleHandler
 {
 	// A map that couples the MIDI note numbers to given AudioPlayer.
 	private Map<Integer, AudioPlayer> sampleMap;
-	
-//	// TODO: ADD Comments
-//	private int currentOctave = 0;
-//	
-//	// TODO: ADD Comments
-//	private static final int MAX_OCTAVE_SHIFT = 2;
-	
-	// TODO: ADD Comments
+	// Instance variable that sets the starting note value
 	private static final int SAMPLE_START_NOTE = 48;
 	
 	
