@@ -10,16 +10,14 @@ import javax.sound.sampled.*;
  * @author Dawit Eshete
  * @author Dylan Hancock
  * 
- * Other Contributers: ChatGPT
+ * Version Date: 6/2/2025
  * 
  * Responsibilities of Class: Manages the audio samples and plays them
  * given MIDI note number.
  */
 public class SampleHandler 
 {
-	// A map that couples the MIDI note numbers to given AudioPlayer.
-	private Map<Integer, AudioPlayer> sampleMap;
-	// Instance variable that sets the starting note value
+	private Map<Integer, AudioPlayer> sampleMap; //SampleHandler has-a Map
 	private static final int SAMPLE_START_NOTE = 48;
 	
 	
@@ -56,16 +54,7 @@ public class SampleHandler
 	 */
 	public void playSample(int midiNote) throws Exception 
 	{
-		int shiftedNote = midiNote;
-		
-		
-		if(shiftedNote < 0 || shiftedNote > 127)
-		{
-			System.out.println("Note out of range!!");
-			
-			return;
-		}
-			
+	
 		// Looks up the AudioPlayer in the map.
 		AudioPlayer player = sampleMap.get(midiNote);
 

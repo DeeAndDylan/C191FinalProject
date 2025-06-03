@@ -3,19 +3,30 @@ package cs191.instruments;
 import cs191.SampleHandler;
 import javax.sound.sampled.*;
 import java.io.InputStream;
-
-public class SampleLoader {
+/**
+ * Lead Author(s):
+ * 
+ * @author Dawit Eshete
+ * @author Dylan Hancock
+ * 
+ * Version Date: 6/2/2025
+ * 
+ * Responsibilities of Class: To load the current samples from the active InstrumentType. 
+ */
+public class SampleLoader 
+{
 	// instance final variables that take the path to the instruments folder and get all of the note names.
-	private static final String BASE_PATH = "/instruments/";
+	private static final String BASE_PATH = "/instruments/"; //SampleLoader has-a String
 	private static final String[] NOTE_NAMES = { "C1", "C1s", "D1", "D1s", "E1", "F1", "F1s", "G1", "G1s", "A2", "A2s",
-			"B2", "C2", "C2s", "D2", "D2s", "E2", "F2", "F2s", "G2", "G2s", "A3", "A3s", "B3", "C3" };
+			"B2", "C2", "C2s", "D2", "D2s", "E2", "F2", "F2s", "G2", "G2s", "A3", "A3s", "B3", "C3" }; //SampleLoader has-a String[]
 
     /**
-    * Constructor that takes in the sample handler, and the instrument type in order to load the instrument into the code. 
+    * Purpose: Constructor that takes in the sample handler, and the instrument type in order to load the instrument into the code. 
     * @param handler, the SampleHandler that will handle the samples of the provided instrument
     * @param type, the type of instrument that will be loaded into the program and the SampleHandler.
     */
-	public static void loadInstrument(SampleHandler handler, InstrumentType type) {
+	public static void loadInstrument(SampleHandler handler, InstrumentType type) 
+	{
 		//for loop that loads the samples into the samplehandler
         for (int i = 0; i < NOTE_NAMES.length; i++) {
 			String path = BASE_PATH + type.getFolderName() + "/" + NOTE_NAMES[i] + ".wav";

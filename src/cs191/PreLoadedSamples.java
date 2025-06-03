@@ -2,11 +2,19 @@ package cs191;
 
 import cs191.instruments.*;
 
+/**
+ * Lead Author(s):
+ * 
+ * @author Dawit Eshete
+ * @author Dylan Hancock
+ * 
+ * Responsibilities of Class: To Preload all of the samples tied to the currently enabled instrument in the GUI. 
+ */
 public class PreLoadedSamples {
 
 	// instance variables
-	private final SampleHandler sampleHandler;
-	private InstrumentType currentInstrument;
+	private final SampleHandler sampleHandler; //PreLoadedSamples has-a SampleHandler
+	private InstrumentType currentInstrument; //PreLoadedSamples has-a InstrumentType
 
 	/*
 	 * Constructor that knows the instrument that is being loaded into it.

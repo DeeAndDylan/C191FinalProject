@@ -1,10 +1,5 @@
 package cs191;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 /**
@@ -15,9 +10,12 @@ import javax.sound.sampled.Clip;
  * 
  * Other Contributers: ChatGPT
  * 
+ * Version Date: 6/2/2025
+ * 
  * Responsibilities of Class: To load and play short audio files.
  */
-public class AudioPlayer {
+public class AudioPlayer 
+{
 	// The Clip object hold the audio sample.
 	private final Clip clip; //AudioPlayer has-a Clip
 
@@ -27,11 +25,12 @@ public class AudioPlayer {
 	 * @param filePath The file path of the audio file(.wav) to be loaded.
 	 * @throws Exception Throws exception if file isn't found or if an error occurs.
 	 */
-	public AudioPlayer(Clip clip) throws Exception {
-		if (clip == null) {
+	public AudioPlayer(Clip clip) throws Exception 
+	{
+		if (clip == null) 
+		{
 			throw new Exception("Clip cant be null");
 		}
-
 		this.clip = clip;
 	}
 
@@ -39,12 +38,15 @@ public class AudioPlayer {
 	 * Purpose: Plays the audio from the beginning. If there is clip is already
 	 * playing, it stops it and then restarts.
 	 */
-	public void play() throws Exception {
-		if (clip == null || !clip.isOpen()) {
+	public void play() throws Exception 
+	{
+		if (clip == null || !clip.isOpen()) 
+		{
 			throw new Exception("Audio clip not available");
 		}
 
-		if (clip.isRunning()) {
+		if (clip.isRunning()) 
+		{
 			// Stops clip if its already playing.
 			clip.stop();
 		}
